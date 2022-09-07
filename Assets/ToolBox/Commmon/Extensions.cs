@@ -215,6 +215,22 @@ public static class Extensions
         return obj is T;
     }
 
+
+    public static bool IsOutOfScreen(this Vector3 point, Camera cam = null)
+    {
+        bool result = false;
+
+        if (cam == null) cam = Camera.main;
+        Vector2 pos = cam.WorldToScreenPoint(point);
+
+        if (pos.x > Screen.width || pos.x < 0f ||
+            pos.y > Screen.height || pos.y < 0f)
+        {
+            result = true;
+        }
+
+        return result;
+    }
 }
 
 #if UNITY_EDITOR
